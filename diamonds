@@ -1,0 +1,43 @@
+#Implement functions below avoiding the use of for loops wherever possible.
+
+#Please read the code and the comments, then experiment with the code to test 
+#any points that remain unclear.  When you  finished experimenting, 
+#*****remove/fix any*******
+#code that generates errors and click submit.
+
+#In each case, you should assume that the dataframe argument has the same 
+#fields as the diamonds data set that comes with ggplot2.
+
+#Don't remove these lines!
+library(methods)
+library(ggplot2)
+data(diamonds)
+
+#Use help(diamonds) to learn about the dataset.
+
+#Returns the character (string) of the cut that has the greatest median price
+cutWithGreatestMedianPrice = function(df){
+    median_prices = aggregate(df["price"], by = df["cut"], FUN=median)
+    return(median_prices[median_prices['price'] == max(median_prices['price'])][1])
+}
+stopifnot(cutWithGreatestMedianPrice(diamonds) == "Fair")
+
+#Returns the list with the labels cut color clarity, price 
+#the containing the cut,color,clarify combination that has the 
+#greatest median price
+
+comboWithGreatestMedianPrice = function(df){
+    median_prices = aggregate(price ~ cut + color + clarity, data=df, FUN=median)
+    maxp = max(median_prices['price'])
+    #print(subset(median_prices, price == maxp))
+    return(subset(median_prices, price == maxp))
+}
+
+x = comboWithGreatestMedianPrice(diamonds)
+
+stopifnot(x["cut"] == "Good" && x["color"] == "D" && x["clarity"] == "IF" && x["price"] == 15081)
+
+print(x["cut"])
+print(x["color"])
+print(x["clarity"])
+print(x["price"])
