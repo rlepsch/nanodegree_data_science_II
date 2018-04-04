@@ -1,0 +1,39 @@
+#Implement functions below avoiding the use of for loops wherever possible.
+#Please read the code and the comments, then experiment with the code to test 
+#any points that remain unclear.  When you  finished experimenting, 
+#************remove/fix any****************
+#code that generates errors and click submit.
+
+#In each case, you should assume that the dataframe argument has the same 
+#fields as the mtcars data set that comes with R.
+
+#Note: On submit, your code will be tested on a dataframe with same format
+#but different data from mtcars.
+
+#Returns a scalar value equal to the mean mpg rating in the dataframe
+meanMPG = function(df){
+    return(mean(df[['mpg']]))
+}
+mpg = meanMPG(mtcars)
+write(paste("Mean mpg =", mpg), file="")
+stopifnot(abs(mpg - 20.09) < 0.1)
+
+#Returns a new dataframe that includes a new column, one that gives the
+#power-ratio, i.e. hp/wt.
+includePR = function(df){
+    df['pr'] <- df['hp'] / df['wt'] 
+    return(df)
+}
+df = includePR(mtcars)
+
+stopifnot(("pr" %in% colnames(df))
+    && (df["Maserati Bora","pr"] == df["Maserati Bora","hp"] / df["Maserati Bora", "wt"]))
+
+#Returns a vector of the names of the cars that have a value of qsec at most
+#max_qsec and a mpg rating of at least min_mpg
+fastButEfficient = function(df, max_qsec, min_mpg){
+    return(row.names(subset(df, qsec <= max_qsec & mpg >= min_mpg)))
+    
+}
+#row.names(subset(mtcars, qsec <= 16 & mpg >= 15))
+stopifnot(sort(fastButEfficient(mtcars, 16, 15)) == sort(c("Ford Pantera L", "Ferrari Dino", "Maserati Bora")))
