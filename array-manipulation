@@ -1,0 +1,33 @@
+#Implement functions below avoiding the use of for loops wherever possible.
+#Please read the code and the comments, then experiment with the code to test 
+#any points that remain unclear.  When you  finished experimenting,
+##*******remove/fix any*******
+#code that generates errors and click submit.
+
+
+#Returns a vector containing the first n squares, i.e. c(1, 4, 9, ... n^2)
+firstSquares = function(n){
+    vetor = seq(1,n)
+    return(vetor * vetor)
+}
+stopifnot(firstSquares(3) == c(1,4,9))
+
+#Returns a logical vector indicating the elements which fall more than 
+#two standard deviations from the mean.  (You may use R's mean and sd
+#and abs functions if you like.)
+extremes = function(x){
+    m = mean(x)
+    s = sd(x)
+    return(abs(x - m) > 2 * s)
+}
+x = c(1.72, -0.01, 0.33,  1.06,  -0.31, 1.35, 0.36, 0.61, 0.35, 10.0)
+stopifnot( extremes(x) == c(rep(c(FALSE), times=9), TRUE))
+
+
+#Returns a matrix (2d array) with length(p)/2 rows and two columns.  The 
+#first column should contain the odd indexed element of p, the second column
+#the even indexes.
+xySplit = function(p){
+
+}
+#stopifnot( xySplit(c(1,2,3,4)) == array(data=c(1,3,2,4), dim(2,2)) )
