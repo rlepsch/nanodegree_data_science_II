@@ -1,0 +1,28 @@
+# Implement the logfact function below so that it computes the logarithm 
+# of the factorial of its input, i.e. log(n!).  To avoid overflow, you will
+# want to use the fact that log(A*B) = log(A) + log(B).  You may use a while
+# loop or recursion, and you use may use R's built-inlog function.
+
+logfact = function(n){
+
+
+    #fatorial(n) = n(n-1)(n-2)...3.2.1
+    #log(fatorial(n)) = log(n) + log(n-1) + log(n-2) + ... + log(3) + log(2) + log(1)
+
+    ret = 0
+    num = n
+
+    repeat{
+        ret = ret + log(num)
+        num = num -1
+        if (num == 0) break
+    }
+    
+    
+    
+    return(ret)
+
+}
+
+# logfact(100) = 363.7394  # note: you may get a slightly different result
+print (logfact(100))
